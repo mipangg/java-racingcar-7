@@ -1,5 +1,6 @@
 package racingcar;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +14,7 @@ class CarTests {
     void car_have_name_under_5() throws Exception {
         Car car = new Car("car1", new DefaultRandomGenerator());
 
-        assertEquals("car1", car.name);
+        assertThat("car1").isEqualTo(car.name);
     }
 
     @Test
@@ -26,7 +27,7 @@ class CarTests {
         car.move();
         int actualPosition = car.getMove();
 
-        assertEquals(actualPosition, expectedPosition);
+        assertThat(actualPosition).isEqualTo(expectedPosition);
     }
 
     @Test
@@ -39,7 +40,7 @@ class CarTests {
         car.move();
         int actualPosition = car.getMove();
 
-        assertEquals(actualPosition, expectedPosition);
+        assertThat(actualPosition).isEqualTo(expectedPosition);
     }
 
 }
