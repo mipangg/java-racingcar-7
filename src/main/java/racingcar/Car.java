@@ -32,4 +32,8 @@ public class Car {
     boolean isMovable() {
         return randomGenerator.genRandom() >= MOVABLE;
     }
+
+    public static class View {
+
+    }
 }
