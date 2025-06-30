@@ -20,7 +20,7 @@ class CarRaceTests {
     @DisplayName("주어진 횟수 동안 n대의 자동차는 경주한다. ")
     void cars_run_for_given_times() throws Exception {
 
-        carRace.race( 3);
+        carRace.run( 3);
         assertThat(cars.get(0).getMove()).isEqualTo(3);
         assertThat(cars.get(1).getMove()).isEqualTo(0);
 
@@ -32,7 +32,7 @@ class CarRaceTests {
 
         Car expectedWinner = cars.getFirst();
 
-        carRace.race(3);
+        carRace.run(3);
 
         assertThat(carRace.getWinners().contains(expectedWinner)).isTrue();
     }
@@ -45,7 +45,7 @@ class CarRaceTests {
         Car expectedWinner2 = cars.get(2);
         Car expectedLooser = cars.get(1);
 
-        carRace.race(3);
+        carRace.run(3);
         assertThat(carRace.getWinners().contains(expectedWinner1)).isTrue();
         assertThat(carRace.getWinners().contains(expectedWinner2)).isTrue();
         assertThat(carRace.getWinners().contains(expectedLooser)).isFalse();

@@ -1,22 +1,35 @@
 package racingcar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CarRace {
 
-    List<Car> cars;
+    private final List<Car> cars;
 
     public CarRace(List<Car> cars) {
         this.cars = cars;
     }
 
-    public void race(int times) {
+    public List<Map<String, Integer>> run(int times) {
+        List<Map<String, Integer>> results = new ArrayList<>();
+
         for (int i = 0; i < times; i++) {
-            for (Car car : cars) {
-                car.move();
-            }
+            results.add(getRaceResult());
         }
+        return results;
+    }
+
+    private Map<String, Integer> getRaceResult() {
+        Map<String, Integer> result = new HashMap<>();
+
+        for (Car car : cars) {
+            result.put(car.getName(), car.move());
+        }
+
+        return result;
     }
 
     public List<Car> getWinners() {

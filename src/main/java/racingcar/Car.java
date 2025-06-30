@@ -3,12 +3,12 @@ package racingcar;
 import racingcar.util.RandomGenerator;
 
 public class Car {
-    final int MOVABLE = 4;
+    private final int MOVABLE = 4;
 
-    RandomGenerator randomGenerator;
+    private final RandomGenerator randomGenerator;
 
-    String name;
-    int move = 0;
+    private String name;
+    private int move = 0;
 
     public Car(String name, RandomGenerator randomGenerator) {
         this.name = name;
@@ -23,10 +23,11 @@ public class Car {
         return name;
     }
 
-    void move() {
+    public int move() {
         if (isMovable()) {
             move++;
         }
+        return move;
     }
 
     boolean isMovable() {

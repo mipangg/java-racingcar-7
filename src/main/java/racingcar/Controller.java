@@ -2,31 +2,30 @@ package racingcar;
 
 import static racingcar.Validator.*;
 
+import java.security.Provider.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import racingcar.util.DefaultRandomGenerator;
 
 public class Controller {
 
-    public List<Car> getCarList(String input) {
-        validateInput(input);
+    private View view = new View();
+    private Mapper mapper = new Mapper();
+    private CarRace carRace;
 
-        String[] carNames = input.replaceAll(" ", "").split(",");
+    public void play() {
+        String carNames = view.inputCarNames();
+        List<Car> carList = mapper.toEntity(carNames);
 
-        return genCars(carNames);
-    }
+        carRace = new CarRace(carList);
 
-    private static List<Car> genCars(String[] carNames) {
-        List<Car> cars = new ArrayList<>();
-        for (String carName : carNames) {
-            if (carName.isEmpty()) {
-                continue;
-            }
-            validateCarName(carName);
-            cars.add(new Car(carName, new DefaultRandomGenerator()));
-        }
+        int times = view.inputRaceTimes();
+        List<Map<String, Integer>> result = carRace.run(times);
+        view.showResult(result);
 
-        return cars;
+        List<Car> winners = carRace.getWinners();
+        view.showWinners(winners);
     }
 
 }

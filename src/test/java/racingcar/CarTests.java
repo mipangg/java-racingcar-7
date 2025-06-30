@@ -14,7 +14,7 @@ class CarTests {
     void car_have_name_under_5() throws Exception {
         Car car = new Car("car1", new DefaultRandomGenerator());
 
-        assertThat("car1").isEqualTo(car.name);
+        assertThat("car1").isEqualTo(car.getName());
     }
 
     @Test
@@ -33,7 +33,7 @@ class CarTests {
     @Test
     @DisplayName("0에서 9 사이의 무작위 값이 4 미만일 경우 전진할 수 없다.")
     void car_can_not_move() throws Exception {
-        Car car = new Car("car1", () -> 1);
+        Car car = new Car("car1", () -> 3);
 
         int expectedPosition = car.getMove();
 

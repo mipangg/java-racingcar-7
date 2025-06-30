@@ -3,13 +3,14 @@ package racingcar;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.security.Provider.Service;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ControllerTests {
+class ServiceTests {
 
-    Controller controller = new Controller();
+    Mapper mapper = new Mapper();
 
     @Test
     @DisplayName("자동차 이름은 쉼표(,)를 기준으로 구분한다.")
@@ -18,7 +19,7 @@ class ControllerTests {
         String input = "pobi,woni,jun";
         List<String> carNames = List.of("pobi", "woni", "jun");
 
-        List<Car> actualCarList = controller.getCarList(input);
+        List<Car> actualCarList = mapper.toEntity(input);
 
         for (int i = 0; i < actualCarList.size(); i++) {
             assertThat(actualCarList.get(i).getName()).isEqualTo(carNames.get(i));
@@ -32,12 +33,11 @@ class ControllerTests {
         String input = "pobi,,jun";
         List<String> carNames = List.of("pobi", "jun");
 
-        List<Car> actualCarList = controller.getCarList(input);
+        List<Car> actualCarList = mapper.toEntity(input);
 
         for (int i = 0; i < actualCarList.size(); i++) {
             assertThat(actualCarList.get(i).getName()).isEqualTo(carNames.get(i));
         }
-
 
     }
 }
