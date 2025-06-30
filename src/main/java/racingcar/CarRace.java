@@ -1,5 +1,6 @@
 package racingcar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarRace {
@@ -18,18 +19,21 @@ public class CarRace {
         }
     }
 
-    public Car getWinner() {
-        Car winner = null;
+    public List<Car> getWinners() {
+        int maxMove = 0;
+        List<Car> winners = new ArrayList<>();
+
         for (Car car : cars) {
-            if (winner == null) {
-                winner = car;
+            if (car.getMove() < maxMove) {
                 continue;
             }
-            if (car.getMove() > winner.getMove()) {
-                winner = car;
+            if (car.getMove() > maxMove) {
+                winners.clear();
             }
+            winners.add(car);
+            maxMove = car.getMove();
         }
-        return winner;
+        return winners;
     }
 
 }

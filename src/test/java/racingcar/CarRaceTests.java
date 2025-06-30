@@ -30,9 +30,25 @@ class CarRaceTests {
     @DisplayName("자동차 경주 게임을 완료한 후 우승자를 선별할 수 있다. ")
     void winner_exist_after_game() throws Exception {
 
-        Car expectedWinner = cars.get(0);
+        Car expectedWinner = cars.getFirst();
+
         carRace.race(3);
-        assertThat(carRace.getWinner()).isEqualTo(expectedWinner);
+
+        assertThat(carRace.getWinners().contains(expectedWinner)).isTrue();
+    }
+
+    @Test
+    @DisplayName("우승자는 한 명 이상일 수 있다.")
+    void winner_can_be_multiple() throws Exception {
+
+        Car expectedWinner1 = cars.get(0);
+        Car expectedWinner2 = cars.get(2);
+        Car expectedLooser = cars.get(1);
+
+        carRace.race(3);
+        assertThat(carRace.getWinners().contains(expectedWinner1)).isTrue();
+        assertThat(carRace.getWinners().contains(expectedWinner2)).isTrue();
+        assertThat(carRace.getWinners().contains(expectedLooser)).isFalse();
 
     }
     
